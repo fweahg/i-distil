@@ -114,4 +114,5 @@ void main() {
 	vec4 fragment_color;
 	mainImage(fragment_color, gl_FragCoord.xy);
 	gl_FragColor = fragment_color;
+//gl_FragColor =  fragment_color/ (fragment_color + vec4(-.3, mouse.y, -.3, 1.))
 }
