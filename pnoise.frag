@@ -100,6 +100,26 @@ float pnoise(in vec3 P, in vec3 rep) {
     return 2.2 * n_xyz;
 }
 
+float f(float x){
+	return ((-((((2.*((-x)/(2.)))/(pi))-floor(((2.*((-x)/(2.)))/(pi)))) *
+		 (1.+2.*(((2.*((-x)/(2.)))/(pi))-floor(((2.*((-x)/(2.)))/(pi))))-
+		 4. * (((((-x)/(2.)))/(pi))-floor(((((-x)/(2.)))/(pi)))))-
+		 (((2.*(-x))/(pi))-floor(((2.*(-x))/(pi)))) *
+		 (1.+2.*(((2.*(-x))/(pi))-floor(((2.*(-x))/(pi))))-
+		 4. * (((-x)/(pi))-floor(((-x)/(pi))))))+
+		 (((((2.*x)/(2.)))/(pi))-floor(((((2.*x)/(2.)))/(pi)))) *
+		 (1.+2.*(((((2.*x)/(2.)))/(pi))-floor(((((2.*x)/(2.)))/(pi))))-
+		 4. * (((((x)/(2.)))/(pi))-floor(((((x)/(2.)))/(pi)))))-
+		 (((2.*x)/(pi))-floor(((2.*x)/(pi)))) *
+		 (1.+2.*(((2.*x)/(pi))-floor(((2.*x)/(pi))))-
+		 4. * (((x)/(pi))-floor(((x)/(pi))))))/(2.));
+}
+
+float g(float x){ return 2.*x/pi - floor(2.*x/pi);}
+float l(float x) { return g(-x) * f(x/2. - pi/4.);}
+float n(float x) { return g(x) * f(x/2. + pi/4.);}
+float h(float x) { return n(x) + l(x + pi/2.);}
+
 void main(void) {
 	rs = resolution;
 	scl = rs.x>rs.y?vec2(rs.x/rs.y, 1.):vec2(1., rs.y/rs.x);
@@ -121,6 +141,9 @@ void main(void) {
 	
 	t = time/(8.*pi);
 	p = 8.*pi*vec3(cos(t), sin(t), sin(t));
+
+        //t = pi*time/(4.*pi);
+        //p = -t+vec3(h(t+pi/2.), h(t-pi/2.), h(-t));
 
 	noise = pnoise(p + 48.*vec3(uv, pow( 0.85373472095314 , 2.)+
 		pow(uv.x*uv.x + uv.y*uv.y, 1.79284291400159 )), (1.79284291400159)*vec3( 1., 1., -1.));
