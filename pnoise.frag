@@ -143,7 +143,7 @@ void main(void) {
 	p = 8.*pi*vec3(cos(t), sin(t), sin(t));
 
         //t = pi*time/(4.*pi);
-        //p = -t+vec3(h(t+pi), h(t-pi), h(-t));
+        //p = t + 8.*vec3(h(t+pi), h(t-pi), h(t));
 
 	noise = pnoise(p + 48.*vec3(uv, pow( 0.85373472095314 , 2.)+
 		pow(uv.x*uv.x + uv.y*uv.y, 1.79284291400159 )), (1.79284291400159)*vec3( 1., 1., -1.));
