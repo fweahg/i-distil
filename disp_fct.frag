@@ -49,10 +49,14 @@ void main() {
 	// Smooth interpolation between 0.1 and 0.9
 	//float y = smoothstep(0.1,mouse.x,st.x);
 	float t = st.x;
-
+/*
 	float y1 = f3(t) ;
 	float y2 = (f1(t) * f3(t) * (f3(t)-1.))/2.;
 	float y3 = floor(t/2.) + .5*(fract(t) * f3(t) * (f3(t)-1.)) ;
+*/
+        float y1 = f3(1./2.+(t/pi))-1.;
+	float y2 = (-1.+f3((t/pi)+1./2.)) * (1.0 - (sin(t) * h1(t)) + sin(t-pi/2.))/2. ;
+	float y3 = 3.*pow(y2, 1.*mouse.y) ;
 
 	//y *= h(st.x, mouse.y) ;
 
