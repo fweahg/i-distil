@@ -209,11 +209,12 @@ void main(void) {
   if (zm >= 0.0 && zm <= 0.001) zm = .1;
 
   vec2 uv = zm * (-1. + 2.*gl_FragCoord.xy/rs) * scl ;
-  float muv = 1.-smoothstep(1.*pi/3., -3.*pi/4., distance(vec2(.0,.0), uv)) ;
+  float muv = 1.-smoothstep(24.*pi/12., -32.*pi/12., distance(vec2(.0,.0), uv)) ;
   vec3 msk0 = vec3(smoothstep(2., -1.,distance(vec2(.0,.0), uv) ));
   vec3 msk1 = vec3(smoothstep(1.79284291400159, -1.79284291400159,distance(vec2(.0,.0), uv)) );
 
-  //uv = uv * pow(dot(muv,muv), 5.*ms.y) ; // uncomment with the mask layer end part 
+  //uv = uv * pow(dot(muv,muv), 5.*ms.y) ; 
+  // uncomment with the mask layer end part 
   uv = uv * dot(muv,muv) ;
 
   noise1 = 3.5*vec3(noised(11.*(xc+zm*uv)).r);
