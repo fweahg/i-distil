@@ -213,6 +213,7 @@ void main(void) {
   vec3 msk0 = vec3(smoothstep(2., -1.,distance(vec2(.0,.0), uv) ));
   vec3 msk1 = vec3(smoothstep(1.79284291400159, -1.79284291400159,distance(vec2(.0,.0), uv)) );
 
+  //uv = uv * pow(dot(muv,muv), 5.*ms.y) ; // uncomment with the mask layer end part 
   uv = uv * dot(muv,muv) ;
 
   noise1 = 3.5*vec3(noised(11.*(xc+zm*uv)).r);
@@ -252,11 +253,11 @@ void main(void) {
 
 
 /*
-  if(gl_FragCoord.x < resolution.x / 2.){
-    gl_FragColor = vec4(vec3(m),msk) ; //color
-  }else if(gl_FragCoord.x > resolution.x / 2. &&
-  				 gl_FragCoord.y < resolution.y / 2.){
-      gl_FragColor = vec4(step(.0, msk.rgb)*vec3(color.rgb * dot(msk.rgb,msk.rgb)), msk) ; //color
+  if(gl_FragCoord.x > resolution.x / 2.){
+    gl_FragColor = msk3 * vec4(vec3(m), msk3) ; //color
+  }else if(gl_FragCoord.x < resolution.x / 2. &&
+        gl_FragCoord.y < resolution.y / 2.){
+      gl_FragColor = vec4(1.-uv*pow(dot(muv,muv),5.*ms.y) ,.0, .0);
   }
 */
 }
