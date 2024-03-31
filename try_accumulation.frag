@@ -2,6 +2,7 @@
 precision highp float;
 
 #define pi 3.1415926535897932384626433832795
+#define e exp(1.0)
 
 out vec4 gl_FragColor;
 
@@ -28,11 +29,11 @@ float pen(vec2 pos, float width){
 
 void main(void) {
 	r = resolution; scl = r.x>r.y?vec2(r.x/r.y, 1.):vec2(1., r.y/r.x);
-	uv = vec2(.5,-.5)+2.*(2. * (-.5 + (gl_FragCoord.xy / resolution.xy))) * scl;
+	uv = vec2(-.66,-.48)+.165*(2. * (-.5 + (gl_FragCoord.xy / resolution.xy))) * scl;
 	ms = (2. * (-.5 + (touch / r))) * scl;
 	pnt= (2. * (-.5 + (pointers[0].xy / resolution.xy))) * scl;
-	orig = vec2(.03125, .0);	
-	b = 37.;	px = 13.5/(r.x*r.y);
+	orig = vec2(.03125, .0);
+	b = 2.*37.;	px = 13.5/(r.x*r.y);
 	tex = texture(backbuffer, gl_FragCoord.xy/resolution);
 	t = time*18.5;//shaping time
 	if (t >= 2.*b*pi/2.) t = (2.*b*pi/2.) + 1.; // +-pi, +-1.
@@ -47,17 +48,17 @@ void main(void) {
 	c = drw(s, vec3(.012, .014, .011));
 
 	l = length(distance(orig,p1));
-	if (l == 0.) l = 1./3e5;
+	if (l == 0.) l = 1./3e15;
 	a = vec4(l);
 	cs = c;
 	tx = tex-c ;
 	c = fma(a,tx,c)/l;//fma(a,b,c) a * b + c
 	//c = (c + (l)*(tex - c))/(l);
-	
+ 
 	//vec4 mc = pow(.75-vec4(dot(.25-2.*uv,vec2(1.0-distance(vec2(.0),5./3.*uv)))),vec4(2.));
 	float mc = pow(.75-dot(.25-uv, 1.0-((5./3.)*uv)), 2.);
-	c -= (1./(128.*pow(5.,3.)/2.))*refract(tx, c, 
-		mc*(1./dot(3.*27./mc, dot( dot(uv*mc,vec2(tx)/mc), dot(uv*mc,vec2(c)/mc) ))) ); //meaningless
-	
-	gl_FragColor = c;
+	c += (1./(128.*13.5))*refract(c, tx, 
+		mc*(1./dot((pow(l,pow(l,l)))/mc, dot( dot(uv*mc, vec2(tx)/mc), dot(uv*mc,vec2(c)/mc) ))) ); //meaningless
+
+	gl_FragColor = vec4(c);
 }
