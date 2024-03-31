@@ -28,7 +28,7 @@ float pen(vec2 pos, float width){
 
 void main(void) {
 	r = resolution; scl = r.x>r.y?vec2(r.x/r.y, 1.):vec2(1., r.y/r.x);
-	uv = vec2(.25,.0)+(2. * (-.5 + (gl_FragCoord.xy / resolution.xy))) * scl;
+	uv = vec2(.5,-.5)+2.*(2. * (-.5 + (gl_FragCoord.xy / resolution.xy))) * scl;
 	ms = (2. * (-.5 + (touch / r))) * scl;
 	pnt= (2. * (-.5 + (pointers[0].xy / resolution.xy))) * scl;
 	orig = vec2(.03125, .0);	
@@ -57,7 +57,7 @@ void main(void) {
 	//vec4 mc = pow(.75-vec4(dot(.25-2.*uv,vec2(1.0-distance(vec2(.0),5./3.*uv)))),vec4(2.));
 	float mc = pow(.75-dot(.25-uv, 1.0-((5./3.)*uv)), 2.);
 	c -= (1./(128.*pow(5.,3.)/2.))*refract(tx, c, 
-		mc*(1./dot(3.*27./mc, dot( dot(mc*uv,mc*vec2(tx)), dot(mc*uv,mc*vec2(c)) ))) ); //meaningless
+		mc*(1./dot(3.*27./mc, dot( dot(uv*mc,vec2(tx)/mc), dot(uv*mc,vec2(c)/mc) ))) ); //meaningless
 	
 	gl_FragColor = c;
 }
