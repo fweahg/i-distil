@@ -46,6 +46,7 @@ void main(void) {
 	s = pen(-p1, (sw)*px);
 	s += pen(p2, (sw)*px);
 	c = drw(s, vec3(.012, .014, .011));
+        //c = drw(s, vec3(.012, .011, .014));
 
 	l = length(distance(orig,p1));
 	if (l == 0.) l = 1./3e15;
