@@ -33,7 +33,7 @@ void main(void) {
 	ms = (2. * (-.5 + (touch / r))) * scl;
 	pnt= (2. * (-.5 + (pointers[0].xy / resolution.xy))) * scl;
 	orig = vec2(.03125, .0);
-	b = 2.*37.;	px = 13.5/(r.x*r.y);
+	b = 3.*37.;	px = 270./(r.x*r.y);
 	tex = texture(backbuffer, gl_FragCoord.xy/resolution);
 	t = time*18.5;//shaping time
 	if (t >= 2.*b*pi/2.) t = (2.*b*pi/2.) + 1.; // +-pi, +-1.
