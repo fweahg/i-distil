@@ -14,6 +14,7 @@ uniform float time;
 uniform float startRandom;
 
 //uniform sampler2D backbuffer;///min:nn;mag:n;s:c;t:c;
+//brushcut.png generated with try_accumulation.frag
 uniform sampler2D brushcut;///min:ll;mag:l;s:m;t:m;
 
 vec4 tex, tx, c;
