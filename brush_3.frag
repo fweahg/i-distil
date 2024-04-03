@@ -60,7 +60,7 @@ void main(void) {
 	s = s1+s2+s3;
 
 	tx = step(.75, s)  * texture(brushcut, e*txc/(exp(s/(s*l))) );
-        //the texture have to be square for this math trick /exp(1./l)
+        //the texture have to be square to use this math trick /exp(1./l)
 	
 	c = tx + (step( .25, 1.-s )*(texture(brushcut, txc)))  ;
 
