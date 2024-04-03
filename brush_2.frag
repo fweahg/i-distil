@@ -46,8 +46,8 @@ void main(void) {
 
 	vec2 p1,p2,p3;
 	p1 = vec2(.0, .125) + .25*vec2(cos(3.*t),sin(5.*t));
-	p2 = vec2(.0, .175) + .375*vec2(cos(5.*(t+2.*pi/3.)),sin(5.*(t+2.*pi/3.)));
-	p3 =-vec2(.0, .125) + .5*vec2(cos(7.*(t+4.*pi/3.)),sin(5.*(t+4.*pi/3.)));
+	p2 = vec2(.0, .175) + .25*vec2(cos(5.*(t+2.*pi/3.)),sin(5.*(t+2.*pi/3.)));
+	p3 =-vec2(.0, .125) + .25*vec2(cos(7.*(t+4.*pi/3.)),sin(5.*(t+4.*pi/3.)));
 
 	s1 = pen(ms+p1, 25.*px);
 	s2= pen(ms+p2, 37.5*px);
