@@ -56,11 +56,11 @@ void main(void) {
 	//c = drw(s, vec3(1., 1., 1.));
 
 	tx = step(.5, 
-			 (s1*vec4(.8,1.,1.,1.) + 
+		   (s1*vec4(.8,1.,1.,1.) + 
 		    s2*vec4(1.,.8,1.,1.) + 
 		    s3*vec4(1.,1.,.8,1.)
 		   )/3.) *
-		    texture(brushcut, txc*sqrt(3./(s1*s1+s2*s2+s3*s3)) );
+		    texture(brushcut, txc*sqrt(3./(2.*(s1*s1+s2*s2+s3*s3))) );
 
 	c =  tx + (step(.5, 1.-((s1+s2+s3)/3.))*(texture(brushcut, txc))) ;
 
