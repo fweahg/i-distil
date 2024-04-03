@@ -57,15 +57,17 @@ void main(void) {
 	s = s1+s2+s3;
 	
 	//tx = step(.75, s)  * texture(brushcut, (e*txc)/(exp(1./l)) );
-	tx = step(.75, s1)  * texture(brushcut, (e*txc)/(exp(s/(s1*l))) );
-	tx+= step(.75, s2)  * texture(brushcut, (e*txc)/(exp(s/(s2*l))) );
-	tx+= step(.75, s3)  * texture(brushcut, (e*txc)/(exp(s/(s3*l))) );
+	tx = step(.75, s1)  * texture(brushcut, s1*txc);
+	tx+= step(.75, s2)  * texture(brushcut, s2*txc);
+	tx+= step(.75, s3)  * texture(brushcut, s3*txc);
 	
 	msk = step( .75, s1 );
 	msk+= step( .75, s2 );
 	msk+= step( .75, s3 );
 	
-	c = tx + ((1.0-msk)*(texture(brushcut, txc))) ;
+	tm = (1.0-msk)*(texture(brushcut, txc));
+	
+	c = tx + tm ;
 
 	gl_FragColor = c;
 }
