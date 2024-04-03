@@ -15,6 +15,9 @@ uniform float startRandom;
 
 //uniform sampler2D backbuffer;///min:nn;mag:n;s:c;t:c;
 uniform sampler2D brushcut;///min:ll;mag:l;s:m;t:m;
+//                      mirror repeat clamp -^---^ 
+// 0,0 is at bottom-left this can change the way you think about 
+// textures coordinates to keep aligment when two or more layers add there values
 
 vec4 tex, tx, c, sc;
 vec2 r, scl, uv, txc, atxc,  orig, ms, pnt;
