@@ -15,9 +15,6 @@ uniform float startRandom;
 
 //uniform sampler2D backbuffer;///min:nn;mag:n;s:c;t:c;
 uniform sampler2D brushcut;///min:ll;mag:l;s:m;t:m;
-//                      mirror repeat clamp -^---^ 
-// 0,0 is at bottom-left this can change the way you think about 
-// textures coordinates to keep aligment when two or more layers add there values
 
 vec4 tex, tx, c, sc;
 vec2 r, scl, uv, txc, atxc,  orig, ms, pnt;
@@ -37,11 +34,11 @@ void main(void) {
 	//tex = texture(backbuffer, gl_FragCoord.xy/resolution);
 	uv = (2. * (-.5 + (gl_FragCoord.xy / resolution.xy))) * scl;
 
-	txc = vec2( .5*(uv.x+1.), .5*(uv.y+1.) );
-
 	orig = vec2(.0, .0);
 	ms = (2. * (-.5 + (touch / r))) * scl;
 	pnt= (2. * (-.5 + (pointers[0].xy / resolution.xy))) * scl;
+	
+	txc = -ms + .5*(vec2( -uv.x, -uv.y )+1.);
 
 	t = pi*time/24.;
 
@@ -59,8 +56,7 @@ void main(void) {
 	l = length(s1+s2+s3);
 	s = s1+s2+s3;
 
-	tx = step(.75, s)  * texture(brushcut, e*txc/(exp(s/(s*l))) );
-        //the texture have to be square (maybe power of two) to use this math trick /exp(1./l)
+	tx = step(.75, s)  * texture(brushcut, e*txc/(exp(1./l)) );
 	
 	c = tx + (step( .25, 1.-s )*(texture(brushcut, txc)))  ;
 
