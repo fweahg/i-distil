@@ -59,7 +59,7 @@ void main(void) {
 	l = length(s1+s2+s3);
 	s = s1+s2+s3;
 
-	tx = step(.75, s)  * texture(brushcut, e*txc/(exp(s)) );
+	tx = step(.75, s)  * texture(brushcut, e*txc/(exp(s/(s*l))) );
 	
 	c = tx + (step( .25, 1.-s )*(texture(brushcut, txc)))  ;
 
