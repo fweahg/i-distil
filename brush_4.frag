@@ -49,9 +49,9 @@ void main(void) {
 	p2 = vec2(.0, .175) + .375*vec2(cos(5.*(t+2.*pi/3.)),sin(5.*(t+2.*pi/3.)));
 	p3 = vec2(.0, .125) + .5*vec2(cos(7.*(t+4.*pi/3.)),sin(5.*(t+4.*pi/3.)));
 
-	s1= pen(ms+p1, 10.*px);
-	s2= pen(ms+p2, 15.*px);
-	s3= pen(ms+p3, 20.*px);
+	s1= pen(p1, 10.*px);
+	s2= pen(p2, 15.*px);
+	s3= pen(ms, 50.*px);
 	
 	l = length(s1+s2+s3);
 	s = s1+s2+s3;
