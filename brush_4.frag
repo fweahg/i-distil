@@ -21,7 +21,7 @@ vec2 r, scl, uv, txc, atxc,  orig, ms, pnt;
 float px, s, s1, s2, s3, msk, l, t;
 
 float pen(vec2 pos, float width){
-	return smoothstep(width, 3.*px , pow(distance(uv, pos), 2.));
+	return smoothstep(width, 3.*px , pow(1./128 * distance(uv, pos), 1./2.));
 }
 
 vec4 drw(float shape, vec3 color){
