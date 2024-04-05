@@ -108,7 +108,7 @@ float NetLayer(vec2 st, float n, float t) {
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ){
   vec2 uv = 2.*(-.5+(fragCoord/resolution));
-	vec2 M = pi*pi*ms + vec2(.1,-.1);
+  vec2 M = vec2(.1,-.1);
   float t = .1*(10.+sin(time/10.));
   //float fft, glow;
 
