@@ -97,7 +97,7 @@ void main(void) {
 */
 	
 	m = 1. - smoothstep(0.0, 6.0, dot(p, p));
-	j = o+vec2(.25, 1.)+dot(p, p)*(dot(p*p-vec2(.25, 1.), p));
+	j = o+vec2(.375,.25)+dot(p, p)*(dot(p*p-vec2(.0,.5), p));
 	mj = 1.-smoothstep(.97, 1., dot(j, j)/length(j));
 	
 	f1 = dam(j, vec2(9.)) ;
