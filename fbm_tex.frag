@@ -35,13 +35,13 @@ vec4 drw(float shape, vec3 color){
 
 mat2 MR(float a){ return mat2(cos(a), -sin(a), sin(a), cos(a));}
 
-vec4 fbm(float f){
+vec4 fbm_sph(float freq, vec2 pos){
 	vec4 t;
-  for (float i = f+1.; i > 0. ; --i){
-		t += -.5+2.*texture(noise, MR(i)*(1./2.+uv/(2.*i)), i);
-		t += -.5+2.*texture(noise, MR(i)*(1./2.+uv/(2.*f-i)), f-i);
+  for (float i = freq + 1.; i > 0. ; --i){
+		t += -.165 + texture(noise, uv/(2.*i) - pos/2., i  );
+		t += -.165 + texture(noise, uv/(2.*freq-i)-pos/2., freq-i);
 	}
-	t /= f;
+	t /= freq;
 	return t;
 }
 
@@ -53,7 +53,7 @@ void main(void) {
 	orig = vec2(.0, .0);
 	ms = (2. * (-.5 + (touch / r))) * scl;
 
-	c = fbm(10.*ms.y);
+	c = fbm_sph(10.*ms.y, ms);
 
 	gl_FragColor = c;
 }
