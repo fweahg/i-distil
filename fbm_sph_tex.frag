@@ -19,6 +19,7 @@ uniform float time;
 uniform float startRandom;
 
 uniform sampler2D backbuffer;///min:nn;mag:n;s:c;t:c;
+//256*256 texture noise
 uniform sampler2D noise;///min:ll;mag:l;s:r;t:r
 
 vec4 tex, c;
@@ -36,13 +37,25 @@ vec4 drw(float shape, vec3 color){
 mat2 MR(float a){ return mat2(cos(a), -sin(a), sin(a), cos(a));}
 
 vec4 fbm_sph(float freq, vec2 pos){
-	vec4 t;
+	vec4 t,s, c = vec4(1.,0.,0.,0.);
+	float f;
+	
   for (float i = freq + 1.; i > 0. ; --i){
-		t += -.165 + texture(noise, uv/(2.*i) - pos/2., i  );
-		t += -.165 + texture(noise, uv/(2.*freq-i)-pos/2., freq-i);
+		t = -.165 + texture(noise, MR(i/(freq*pi*pi))*uv/(2.*i) - pos/2., i  );
+		t += -.165 + texture(noise, MR(i/(-freq*pi*pi))*uv/(2.*freq-i) - pos/2., freq-i);
+		
+		f = mod(i, 3.);
+	
+		if(f >= 0.) c = vec4(1.,0.,0.,1.);
+		if(f >= 1.) c = vec4(0.,1.,0.,1.);
+		if(f >= 2.) c = vec4(0.,0.,1.,1.);
+		
+		s += mix(t, c, c);
 	}
-	t /= freq;
-	return t;
+	
+	s = s / (2.*freq);
+	
+	return s;
 }
 
 void main(void) {
@@ -53,7 +66,7 @@ void main(void) {
 	orig = vec2(.0, .0);
 	ms = (2. * (-.5 + (touch / r))) * scl;
 
-	c = fbm_sph(10.*ms.y, ms);
+	c = fbm_sph(10., 128.*vec2(-sin(time/1000.), -cos(time/1000.)));
 
 	gl_FragColor = c;
 }
