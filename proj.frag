@@ -101,8 +101,8 @@ void main(void) {
 	mj = 1.-smoothstep(.97, 1., dot(j, j)/length(j));
 	
 	f1 = dam(j, vec2(9.)) ;
-	f2 = dam(try(j), vec2(9));
-	f3 = dam(trx(j), vec2(9.));
+	f2 = dam(try(j), vec2(9.*ms.x));
+	f3 = dam(trx(j), vec2(9.*ms.y));
 	
 	col = m*mj*vec3(f1, f2, f3);
 	
