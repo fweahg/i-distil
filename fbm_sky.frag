@@ -40,7 +40,7 @@ vec4 fbm_sky(vec2 pos){
 	vec4 t,s,c;
 	float i, f, q, m;
 
-	q = 9.;
+	q = 9.;//27.
 
 	m = (2.-dot(uv,uv));
 	m = m*step(.0, m);
