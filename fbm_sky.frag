@@ -40,7 +40,7 @@ vec4 fbm_sky(vec2 pos){
 	vec4 t,s,c;
 	float i, f, q, m;
 
-	q = 9.;//27.
+	q = 27.;//27.
 
 	m = (2.-dot(uv,uv));
 	m = m*step(.0, m);
@@ -73,7 +73,7 @@ void main(void) {
 	orig = vec2(.0, .0);
 	ms = (2. * (-.5 + (touch / r))) * scl;
 
-	c = fbm_sky(vec2(time/10.,sin(time/10.)));
+	c = fbm_sky(vec2(time/100.,sin(time/100.)));
 
 	gl_FragColor = c;
 }
