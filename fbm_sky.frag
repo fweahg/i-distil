@@ -1,4 +1,6 @@
 #version 320 es
+// tu decoupe du courant continu ça sert à rien il reste en entier, à peut près
+
 precision highp float;
 
 #define pi 3.1415926535897932384626433832795
