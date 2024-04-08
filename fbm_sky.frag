@@ -68,7 +68,7 @@ vec4 fbm_sky(vec2 pos){
 void main(void) {
 	r = resolution;
 	scl = r.x>r.y?vec2(r.x/r.y, 1.):vec2(1., r.y/r.x);
-	uv = (2. * (-.5 + (gl_FragCoord.xy / resolution.xy))) * scl;
+	uv = (1. * (-.5 + (gl_FragCoord.xy / resolution.xy))) * scl;
 
 	orig = vec2(.0, .0);
 	ms = (2. * (-.5 + (touch / r))) * scl;
