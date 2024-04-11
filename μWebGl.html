@@ -8,12 +8,11 @@
 </head>
 <body>
 <input type="range" id="quality" min="80" max="100" value="99" step="1" />
-<canvas style="left-margin:30px;" id="canvas" width="256" height="256"></canvas>
-<textarea style="translate:10" id="LOG" cols="40" rows="15" spellcheck="false"></textarea><hr/>
-
+<canvas style="left-margin:30px;" id="canvas" width="640" height="360"></canvas>
+<hr/>
 <textarea id="VS" cols="40" rows="15" spellcheck="false" oninput="redraw()"></textarea>
 <textarea id="FS" cols="40" rows="15" spellcheck="false" oninput="redraw()"></textarea>
-
+<textarea style="translate:10" id="LOG" cols="40" rows="15" spellcheck="false"></textarea>
 <script>
 let cx=document.querySelector("canvas").getContext("webgl2");
 let pg=cx.createProgram();
@@ -21,13 +20,13 @@ let vs=cx.createShader(cx.VERTEX_SHADER);	cx.attachShader(pg, vs);
 let fs=cx.createShader(cx.FRAGMENT_SHADER);	cx.attachShader(pg, fs);
 VS.value=`attribute vec4 p;\n
 void main(){\n\t
-gl_PointSize=200.;\n\t
+gl_PointSize=640.;\n\t
 gl_Position=p;\n
 }`;
 FS.value=`precision highp float;\n
 void main(){\n
-vec2 uv = -1. + gl_FragCoord.xy/128.;\n
-float s=.5-dot(uv,uv);\n
+vec2 uv = -1. + (2.*gl_FragCoord.xy/vec2(640.,360.));\n
+float s=1.-dot(uv,uv);\n
 gl_FragColor=2.*vec4(.6*s,.3*s,.2*s,1.);\n
 }`;
 function setProgram(vsrc, fsrc){
