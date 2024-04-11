@@ -1,12 +1,14 @@
 <html>
 <head>
   <title>webgl</title>
-  <style>textarea{background-color: bisque;}</style>
+  <style>
+  textarea{background-color: bisque;}
+  input#quality{position:absolute;left:270px;top:0px;margin:0px;padding:0px}
+  </style>
 </head>
 <body>
-<div style="transform:rotate(-90.0deg),position:absolute,right:44px"><input type="range" id="quality" min="80" max="100" value="99" onChange="setQ" step="1" /></div>
-<canvas id="canvas" width="256" height="256"></canvas>
-
+<input type="range" id="quality" min="80" max="100" value="99" step="1" />
+<canvas style="left-margin:30px;" id="canvas" width="256" height="256"></canvas>
 <textarea style="translate:10" id="LOG" cols="40" rows="15" spellcheck="false"></textarea><hr/>
 
 <textarea id="VS" cols="40" rows="15" spellcheck="false" oninput="redraw()"></textarea>
@@ -42,15 +44,7 @@ function redraw(){
 	try{setProgram(VS.value, FS.value)}catch(e){LOG.value=e;throw e}
 	cx.useProgram(pg);	cx.clear(0x4000);	cx.drawArrays(0, 0,1);
 };	
-/*
-const elem = document.querySelector('#screenshot');
-elem.addEventListener('click', () => {
-  redraw();
-  canvas.toBlob((blob) => {
-    saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
-  });
-});
- */
+
 const saveBlob = (function() {
   const a = document.createElement('a');
   document.body.appendChild(a);
