@@ -1,0 +1,75 @@
+<html>
+  <head>
+  <style>textarea{background-color: bisque;}</style>
+  </head>
+<body>
+<canvas id="canvas" width="256" height="256"></canvas>
+<button id="screenshot" type="button">Save...</button>
+<textarea style="translate:10%" id="LOG" cols="40" rows="15" spellcheck="false"></textarea><hr/>
+
+<textarea id="VS" cols="40" rows="15" spellcheck="false" oninput="redraw()"></textarea>
+<textarea id="FS" cols="40" rows="15" spellcheck="false" oninput="redraw()"></textarea>
+
+<script>"use strict;"
+let cx=document.querySelector("canvas").getContext("webgl2" , {preserveDrawingBuffer: true});
+let pg=cx.createProgram();
+let vs=cx.createShader(cx.VERTEX_SHADER);	cx.attachShader(pg, vs);
+let fs=cx.createShader(cx.FRAGMENT_SHADER);	cx.attachShader(pg, fs);
+VS.value=`attribute vec4 p;\n
+void main(){\n\t
+gl_PointSize=200.;\n\t
+gl_Position=p;\n
+}`;
+FS.value=`precision highp float;\n
+void main(){\n
+vec2 uv = -1. + gl_FragCoord.xy/128.;\n
+float s=.5-dot(uv,uv);\n
+gl_FragColor=2.*vec4(.6*s,.3*s,.2*s,1.);\n
+}`;
+function setProgram(vsrc, fsrc){
+	cx.shaderSource(vs, vsrc);	cx.compileShader(vs);
+	cx.shaderSource(fs, fsrc);	cx.compileShader(fs);
+	cx.linkProgram(pg);	cx.validateProgram(pg);
+	if(cx.getProgramParameter(pg,cx.LINK_STATUS))return pg;
+	let log=`fs:${cx.getShaderInfoLog(fs)}\npg:${cx.getProgramInfoLog(pg)}\n`;
+	log+=`vs:${cx.getShaderInfoLog(vs)}\n`;	throw log;
+}
+
+function redraw(){
+	cx.clearColor(0,0,0, 1);	LOG.value="";
+	try{setProgram(VS.value, FS.value)}catch(e){LOG.value=e;throw e}
+	cx.useProgram(pg);	cx.clear(0x4000);	cx.drawArrays(0, 0,1);
+};	
+
+redraw();
+
+const elem = document.querySelector('#screenshot');
+elem.addEventListener('click', () => {
+  redraw();
+  canvas.toBlob((blob) => {
+    saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+  });
+});
+ 
+const saveBlob = (function() {
+  const a = document.createElement('a');
+  document.body.appendChild(a);
+  a.style.display = 'none';
+  return function saveData(blob, fileName) {
+     const url = window.URL.createObjectURL(blob);
+     a.href = url;
+     a.download = fileName;
+     a.click();
+  };
+}());
+	
+cx.addEventListener('click', () => {
+  redraw();
+  cx.toBlob((blob) => {
+    saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+  });
+});
+
+</script>
+</body>
+</html>
