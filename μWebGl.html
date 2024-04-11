@@ -1,16 +1,17 @@
 <html>
-  <head>
+<head>
+  <title>webgl</title>
   <style>textarea{background-color: bisque;}</style>
-  </head>
+</head>
 <body>
 <canvas id="canvas" width="256" height="256"></canvas>
-<button id="screenshot" type="button">Save...</button>
+
 <textarea style="translate:10%" id="LOG" cols="40" rows="15" spellcheck="false"></textarea><hr/>
 
 <textarea id="VS" cols="40" rows="15" spellcheck="false" oninput="redraw()"></textarea>
 <textarea id="FS" cols="40" rows="15" spellcheck="false" oninput="redraw()"></textarea>
 
-<script>"use strict;"
+<script>
 let cx=document.querySelector("canvas").getContext("webgl2" , {preserveDrawingBuffer: true});
 let pg=cx.createProgram();
 let vs=cx.createShader(cx.VERTEX_SHADER);	cx.attachShader(pg, vs);
@@ -40,9 +41,7 @@ function redraw(){
 	try{setProgram(VS.value, FS.value)}catch(e){LOG.value=e;throw e}
 	cx.useProgram(pg);	cx.clear(0x4000);	cx.drawArrays(0, 0,1);
 };	
-
-redraw();
-
+/*
 const elem = document.querySelector('#screenshot');
 elem.addEventListener('click', () => {
   redraw();
@@ -50,7 +49,7 @@ elem.addEventListener('click', () => {
     saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
   });
 });
- 
+ */
 const saveBlob = (function() {
   const a = document.createElement('a');
   document.body.appendChild(a);
@@ -62,13 +61,15 @@ const saveBlob = (function() {
      a.click();
   };
 }());
-	
-cx.addEventListener('click', () => {
+
+cx.canvas.addEventListener('click', () => {
   redraw();
-  cx.toBlob((blob) => {
+  cx.canvas.toBlob((blob) => {
     saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
   });
 });
+
+redraw();
 
 </script>
 </body>
