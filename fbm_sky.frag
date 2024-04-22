@@ -1,6 +1,9 @@
 #version 320 es
 precision highp float;
 
+//j’enlève mes nouvelles lunettes le troisième jour, 
+//j’ai l’impression que les verres sont moins épais, ça ressemble un peu
+
 #define pi 3.1415926535897932384626433832795
 #define e exp(1.0)
 // log is ln ;so  lg*log(n) is log10(n)
