@@ -56,6 +56,7 @@ vec4 postfxnvp(vec4 c) {
 	//return r;
 	//return r + FragColor[1] * .00390625;
 	//return r + FragColor[1] * ((mouse-.5).x)/10. ;
+    //return r + (FragColor[1]*(( .25*(2.+sin(.05*time*pow(PI,5.)*81./121.)) -.4)/10. ));
 	return r + (FragColor[1]*(( .25*(2.+sin(time*PI*121./81.)) -.4)/10. ));
 }
 
