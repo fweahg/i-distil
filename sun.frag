@@ -16,7 +16,8 @@ uniform sampler2D backbuffer;
 
 // Rotation matrix, it does a big impact, as usual.
 #define pi 3.1415926536
-#define angle pow(exp(1.),2.)/sqrt(pow(exp(1.), 2.)-1.)
+//#define angle pow(exp(1.),2.)/sqrt(pow(exp(1.), 2.)-1.)
+#define angle pi/3.
 
 const mat2 m = mat2( .8*sin(angle), 1.2*cos(angle), -1.2*cos(angle), .8*sin(angle) );
 
