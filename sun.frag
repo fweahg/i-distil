@@ -16,10 +16,11 @@ uniform sampler2D backbuffer;
 
 // Rotation matrix, it does a big impact, as usual.
 #define pi 3.1415926536
-//#define angle pow(exp(1.),2.)/sqrt(pow(exp(1.), 2.)-1.)
+//#define angle2 pow(exp(1.),2.)/sqrt(pow(exp(1.), 2.)-1.)
 #define angle pi/3.
 
 const mat2 m = mat2( .8*sin(angle), 1.2*cos(angle), -1.2*cos(angle), .8*sin(angle) );
+//const mat2 m2 = mat2( .8*sin(angle2), 1.2*cos(angle2), -1.2*cos(angle2), .8*sin(angle2) );
 
 // Time simplification and easier overall speed control.
 #define time time * .125
@@ -81,9 +82,9 @@ float voronoi2D(in vec2 n)
 float fbm4( vec2 p )
 {
     float f = 0.0;
-    f += 0.5000 * voronoi2D( p ); p = p * 2. * m;
-    f += 0.2500 * voronoi2D( p ); p = p * 2. * m;
-    f += 0.1250 * voronoi2D( p ); p = p * 2. * m;
+    f += 0.5000 * voronoi2D( p ); p = p * 2. * m;// p = -m * p * 2. * m2;
+    f += 0.2500 * voronoi2D( p ); p = p * 2. * m;// p = -m * p * 2. * m2;
+    f += 0.1250 * voronoi2D( p ); p = p * 2. * m;// p = -m * p * 2. * m2;
     f += 0.0625 * voronoi2D( p );
     return f;
 }
