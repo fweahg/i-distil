@@ -160,7 +160,7 @@ void main(void)
 
     // Time varying pixel color.
     if ( dot(p, p) < sz*sz) {
-    	col = GetColor(p) * ( sz*sz - dot(p, p) )/sz;
+    	col = GetColor(p - 4.*pos) * ( sz*sz - dot(p, p) )/sz;
 
     }
 
