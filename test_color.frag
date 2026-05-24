@@ -61,5 +61,9 @@ qu'est-ce que ca veut dire en fait ce truc
 ds² = -1/(1-2m/r) dr² - r² * (dθ² + sin²θdφ²)+(1 - 2m/r) dt²
 <=> g disparu dans (les noix de pécan ca peut peut être marcher)
 ds² = -4m(2m + ρ²)dρ² - (2m + ρ²)²(dθ² + sin²dφ²) + ρ/(2m + ρ) dt²
+
+avec le conditionnel présent:
+ds² = dx² + dy² + dz² - c²dt²
+ρ² = r - 2m
 /*
 }
