@@ -65,5 +65,7 @@ ds² = -4m(2m + ρ²)dρ² - (2m + ρ²)²(dθ² + sin²dφ²) + ρ/(2m + ρ) dt
 avec le conditionnel présent:
 ds² = dx² + dy² + dz² - c²dt²
 ρ² = r - 2m
+
+// c'est original https://m.youtube.com/watch?v=DfsPNZlRA_Y
 /*
 }
