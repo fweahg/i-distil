@@ -54,5 +54,5 @@ void main(void) {
 
   if (uv.y>.95) col = vec3(uv.x+1.)/2.;
 
-	gl_FragColor = vec4(col, 0.);
+	gl_FragColor = vec4(col, 0.5);
 }
