@@ -55,4 +55,11 @@ void main(void) {
   if (uv.y>.95) col = vec3(uv.x+1.)/2.;
 
 	gl_FragColor = vec4(col, 0.5);
+//.                          ^^^
+/*
+qu'est-ce que ca veut dire en fit ce truc
+ds² = -1/(1-2m/r) dr² - r² * (dθ² + sin²θdφ²)+(1 - 2m/r) dt²
+<=> g disparu dans (les noix de pécan ca peut peut être marcher)
+ds² = -4m(2m + ρ²)dρ² - (2m + ρ²)²(dθ² + sin²dφ²) + ρ/(2m + ρ) dt²
+/*
 }
