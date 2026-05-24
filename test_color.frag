@@ -8,7 +8,7 @@ uniform vec2 resolution;
 uniform vec2 mouse;
 
 #define ms 4.*(mouse-.5)
-#define tg (ms.y/sqrt(ms.y*ms.y))
+#define tg (ms.x/abs(ms.x))
 
 float f(float x){
 	return abs(x);
@@ -45,6 +45,7 @@ void main(void) {
   fr+= p(uv.y, 1.67, -.9);
 
   col = (.5)*(uv.x + vec3(fr, fg, fb));
+  //col = pow(col, vec3(pow(3./2., tg)));
 
   if (distance(uv.x+1., .5) < .002) col = vec3(0., 0., 0.);
   if (distance(uv.x+1., fr) < .002) col = vec3(.5, 0., 0.);
